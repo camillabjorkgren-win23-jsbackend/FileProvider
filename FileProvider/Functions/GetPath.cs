@@ -14,13 +14,12 @@ public class GetPath(ILogger<GetPath> logger, DataContext context)
     private readonly DataContext _context = context;
 
     [Function("GetPath")]
-    public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "get")] HttpRequest req)
+    public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequest req)
     {
-        var body = await new StreamReader(req.Body).ReadToEndAsync();
-        if(!string.IsNullOrEmpty(body)){
-            var fileName = JsonConvert.DeserializeObject<string>(body);
-            if(fileName != null)
+        string fileName = await new StreamReader(req.Body).ReadToEndAsync();
+        if (!string.IsNullOrEmpty(fileName)){          
             {
+                fileName = JsonConvert.DeserializeObject<string>(fileName);
                 var file = await _context.Files
                     .Where(f => f.FileName.Contains(fileName))
                     .FirstOrDefaultAsync();
