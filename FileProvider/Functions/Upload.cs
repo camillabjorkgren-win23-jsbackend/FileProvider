@@ -34,7 +34,7 @@ namespace FileProvider.Functions
                     fileEntity.FilePath = filePath;
 
                     await _fileService.SaveToDatabaseAsync(fileEntity);
-                    return new OkObjectResult(fileEntity);
+                    return new OkObjectResult(fileEntity.FilePath);
                 }
             }
             catch (Exception ex)
