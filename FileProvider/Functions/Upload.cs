@@ -18,7 +18,7 @@ namespace FileProvider.Functions
         {
             try
             {
-                if (req.Form.Files["file"] is IFormFile file)
+                if (req.Form.Files["files"] is IFormFile file)
                 {
                     var containerName = !string.IsNullOrEmpty(req.Query["containerName"]) ? req.Query["containerName"].ToString() : "files";
   
