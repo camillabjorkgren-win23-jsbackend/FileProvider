@@ -17,7 +17,7 @@ public class FileService(ILogger<FileService> logger, DataContext context, BlobS
     {      
         _container = _client.GetBlobContainerClient(containerName);
         await _container.CreateIfNotExistsAsync();
-        _client.GetBlobContainerClient(containerName).SetAccessPolicy(PublicAccessType.BlobContainer);
+        _client.GetBlobContainerClient(containerName);
     }
 
     public string SetFileName(IFormFile file)
